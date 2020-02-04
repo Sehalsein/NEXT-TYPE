@@ -1,0 +1,40 @@
+{
+  "name": "next-type",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "lint": "eslint",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@zeit/next-css": "1.0.1",
+    "bootstrap": "4.4.1",
+    "next": "9.2.1",
+    "prop-types": "15.7.2",
+    "react": "16.12.0",
+    "react-bootstrap": "1.0.0-beta.16",
+    "react-dom": "16.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "13.7.0",
+    "@types/react": "16.9.19",
+    "@typescript-eslint/eslint-plugin": "2.18.0",
+    "@typescript-eslint/parser": "2.18.0",
+    "eslint": "6.8.0",
+    "eslint-config-airbnb": "18.0.1",
+    "eslint-config-prettier": "6.10.0",
+    "eslint-plugin-import": "2.20.1",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-prettier": "3.1.2",
+    "eslint-plugin-react": "7.18.3",
+    "eslint-plugin-react-hooks": "1.7.0",
+    "prettier": "1.19.1",
+    "typescript": "3.7.5"
+  }
+}
