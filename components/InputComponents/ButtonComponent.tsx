@@ -2,27 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // TODO: Fix Button Type
-
-const ButtonComponent = (props) => {
-  const { className, onClick, title } = props;
-  return (
-    <>
-      <button type="submit" className={`btn ${className}`} onClick={onClick}>
-        {title}
-      </button>
-    </>
-  );
+const ButtonComponent = (props): JSX.Element => {
+    const { className, onClick, title, type } = props;
+    return <input type={type} className={`btn ${className}`} onClick={onClick} value={title} />;
 };
 
 ButtonComponent.defaultProps = {
-  className: '',
-  onClick: () => {},
+    className: '',
+    type: 'button',
+    onClick: (): void => {},
 };
 
 ButtonComponent.propTypes = {
-  className: PropTypes.string,
-  onClick: PropTypes.func,
-  title: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    onClick: PropTypes.func,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string,
 };
 
 export default ButtonComponent;

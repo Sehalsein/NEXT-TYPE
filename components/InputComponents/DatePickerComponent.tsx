@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InputComponent = (props): JSX.Element => {
+const DatePickerComponent = (props): JSX.Element => {
     const {
         label,
         isRequired,
@@ -41,7 +41,7 @@ const InputComponent = (props): JSX.Element => {
     );
 };
 
-InputComponent.defaultProps = {
+DatePickerComponent.defaultProps = {
     label: '',
     isRequired: false,
     isReadOnly: false,
@@ -53,7 +53,7 @@ InputComponent.defaultProps = {
     validator: null,
 };
 
-InputComponent.propTypes = {
+DatePickerComponent.propTypes = {
     label: PropTypes.string,
     isRequired: PropTypes.bool,
     isReadOnly: PropTypes.bool,
@@ -68,4 +68,4 @@ InputComponent.propTypes = {
     validator: PropTypes.objectOf(PropTypes.any),
 };
 
-export default InputComponent;
+export default DatePickerComponent;

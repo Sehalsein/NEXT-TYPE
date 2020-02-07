@@ -1,30 +1,55 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true
-  },
-  "extends": ["plugin:react/recommended", "airbnb"],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
     },
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-  },
-
-  "plugins": ["react", "@typescript-eslint"],
-  "rules": {
-    "react/jsx-filename-extension": [
-      1,
-      {
-        "extensions": [".tsx"]
-      }
-    ]
-  }
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "airbnb",
+        "plugin:prettier/recommended",
+        "prettier/@typescript-eslint",
+        "prettier/react"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": ["react", "@typescript-eslint", "prettier"],
+    "rules": {
+        "await-promise": 0,
+        "prettier/prettier": "error",
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [".tsx"]
+            }
+        ],
+        "react/boolean-prop-naming": [
+            "error",
+            {
+                "rule": "^is[A-Z]([A-Za-z0-9]?)+",
+                "validateNested": true
+            }
+        ],
+        "react/jsx-no-useless-fragment": "error",
+        "react/jsx-no-script-url": [
+            "error",
+            [
+                {
+                    "name": "Link",
+                    "props": ["to"]
+                }
+            ]
+        ]
+    }
 }
