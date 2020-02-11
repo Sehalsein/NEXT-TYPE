@@ -1,0 +1,136 @@
+@import '~antd/dist/antd.less';
+
+.trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+    &:hover {
+        color: @primary-color;
+    }
+}
+.logo {
+    height: 32px;
+    margin: 16px 0px;
+    position: relative;
+    padding: 0 24px;
+    overflow: hidden;
+    background: #001529;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.logo img {
+    display: inline-block;
+    height: 32px;
+    vertical-align: middle;
+}
+
+.logo h1 {
+    display: inline-block;
+    margin: 0 0 0 12px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    vertical-align: middle;
+    animation: fade-in;
+    animation-duration: 0.3s;
+}
+
+.header-logo {
+    display: inline-flex;
+    align-items: center;
+    height: 64px;
+    padding: 0 0 0 24px;
+    font-size: 20px;
+    line-height: 64px;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.header-logo img {
+    display: inline-block;
+    height: 32px;
+    vertical-align: middle;
+}
+
+.ant-form-item {
+    margin-bottom: 10px;
+}
+
+.ant-row-flex {
+    margin: 0px -4px !important;
+}
+
+/***************************
+** Card
+***************************/
+
+.ant-card-body {
+    border: ;
+}
+
+/***************************
+** Table 
+***************************/
+
+.ant-card-bordered {
+    border: @border-width-base @border-style-base @primary-color;
+}
+
+.table-style-1 table {
+    border-collapse: separate;
+    border-spacing: 0 7px !important;
+    thead {
+        tr {
+            th {
+                background: transparent;
+                color: #000;
+                font-size: 12px;
+                letter-spacing: 1px;
+                border: none;
+                font-weight: 700;
+                padding-bottom: 0px !important;
+            }
+        }
+    }
+    > tbody {
+        > tr {
+            > td {
+                color: @text-color;
+                font-size: 15px;
+                background-color: @card-background;
+                padding: 9px 15px;
+                border: @border-width-base @border-style-base @border-color-base;
+                border-left: none;
+                border-right: none;
+                vertical-align: middle;
+                font-weight: 400;
+                white-space: nowrap;
+                > a {
+                    text-decoration: none;
+                }
+                &:first-child {
+                    padding-left: 45px !important;
+                    border-left: @border-width-base @border-style-base @border-color-base;
+                    font-weight: 600;
+                    border-radius: @card-radius 0 0 @card-radius;
+                }
+                &:last-child {
+                    border-right: @border-width-base @border-style-base @border-color-base;
+                    border-radius: 0 @card-radius @card-radius 0;
+                }
+            }
+        }
+    }
+    > thead {
+        > tr {
+            > th {
+                &:first-child {
+                    padding-left: 45px !important;
+                }
+            }
+        }
+    }
+}

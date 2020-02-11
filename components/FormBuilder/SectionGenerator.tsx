@@ -1,36 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Row, Col } from 'antd';
 
 import FormBuilder from '@components/FormBuilder/FormBuilder';
 
 const SectionGenerator = (props): JSX.Element => {
-    const { sections, handleInput, formData, validator, className } = props;
+    const { sections, handleInput, formData, className } = props;
 
-    return (
-        <Row>
-            {sections.map((section, index) => (
-                <Col
-                    xs={section.responsive ? section.responsive.xs : 12}
-                    sm={section.responsive ? section.responsive.sm : 12}
-                    md={section.responsive ? section.responsive.md : 12}
-                    lg={section.responsive ? section.responsive.lg : 12}
-                    xl={section.responsive ? section.responsive.xl : 12}
-                    key={index}
-                >
-                    <div className={className}>
-                        <FormBuilder
-                            fields={section.fields}
-                            handleInput={handleInput}
-                            formData={formData}
-                            validator={validator}
-                        />
-                    </div>
-                </Col>
-            ))}
-        </Row>
-    );
+    return sections.map((section, index) => (
+        <Col
+            xs={section.responsive ? section.responsive.xs : 12}
+            sm={section.responsive ? section.responsive.sm : 12}
+            md={section.responsive ? section.responsive.md : 12}
+            lg={section.responsive ? section.responsive.lg : 12}
+            xl={section.responsive ? section.responsive.xl : 12}
+            key={index}
+        >
+            <div className={className}>
+                <FormBuilder fields={section.fields} handleInput={handleInput} formData={formData} />
+            </div>
+        </Col>
+    ));
 };
 
 SectionGenerator.defaultProps = {
@@ -40,7 +30,6 @@ SectionGenerator.defaultProps = {
 
 SectionGenerator.propTypes = {
     handleInput: PropTypes.func.isRequired,
-    validator: PropTypes.objectOf(PropTypes.any),
     sections: PropTypes.arrayOf(
         PropTypes.shape({
             fields: PropTypes.arrayOf(

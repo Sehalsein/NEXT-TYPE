@@ -1,53 +1,46 @@
 import React from 'react';
-import Col from 'react-bootstrap/Col';
-import SimpleReactValidator from 'simple-react-validator';
+import { Col, Card, Typography } from 'antd';
+// import SimpleReactValidator from 'simple-react-validator';
 import FormGenerator from '@components/FormBuilder/FormGenerator';
+
+const { Title } = Typography;
 
 type State = {
     formValue: {
-        name: '';
-        employeeId: '';
+        firstName: '';
+        lastName: '';
         email: '';
         designation: '';
-        mobileNo: '';
-        dateOfJoining: '';
-        reportingManager: '';
-        type: '';
-        department: '';
+        role: '';
+        dob: '';
+        validity: '';
     };
 };
 
 type Props = {
-    formConfig: any;
+    fields: any;
+    sections: any;
+    primaryButton: any;
+    secondaryButton: any;
 };
 
 class UserAdd extends React.Component<Props, State> {
-    private validator: SimpleReactValidator;
-
     constructor(prop) {
         super(prop);
         this.state = {
             formValue: {
-                name: '',
-                employeeId: '',
+                firstName: '',
+                lastName: '',
                 email: '',
                 designation: '',
-                mobileNo: '',
-                dateOfJoining: '',
-                reportingManager: '',
-                type: '',
-                department: '',
+                role: '',
+                dob: '',
+                validity: '',
             },
         };
-
-        this.validator = new SimpleReactValidator({
-            autoForceUpdate: this,
-            element: (message): JSX.Element => <div className="errorMessage">{message}</div>,
-        });
     }
 
-    handleInput = (e): void => {
-        const { value, name } = e.target;
+    handleInput = (name, value): void => {
         this.setState(prevState => ({
             formValue: {
                 ...prevState.formValue,
@@ -67,38 +60,34 @@ class UserAdd extends React.Component<Props, State> {
         console.log('Clear');
         this.setState({
             formValue: {
-                name: '',
-                employeeId: '',
+                firstName: '',
+                lastName: '',
                 email: '',
                 designation: '',
-                mobileNo: '',
-                dateOfJoining: '',
-                reportingManager: '',
-                type: '',
-                department: '',
+                role: '',
+                dob: '',
+                validity: '',
             },
         });
     };
 
     render(): JSX.Element {
         const { formValue } = this.state;
-        const { formConfig } = this.props;
+        const { fields, sections, primaryButton, secondaryButton } = this.props;
         return (
-            <>
-                <h1>User Creation</h1>
-                <Col sm={12}>
-                    {/* <div className="box-card"> */}
+            <Col>
+                <Title level={2}>User Creation</Title>
+                <Card>
                     <FormGenerator
-                        formConfig={formConfig}
-                        handleInput={this.handleInput}
+                        fields={fields}
+                        sections={sections}
+                        primaryButton={primaryButton}
+                        secondaryButton={secondaryButton}
                         formData={formValue}
-                        onSubmit={this.formSubmit}
-                        onSecondaryButton={this.formReset}
-                        validator={this.validator}
+                        handleInput={this.handleInput}
                     />
-                    {/* </div> */}
-                </Col>
-            </>
+                </Card>
+            </Col>
         );
     }
 }

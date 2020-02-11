@@ -1,83 +1,68 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Select, Form } from 'antd';
+import { Radio, Form } from 'antd';
 
-const { Option } = Select;
-
-const SelectComponent = (props): JSX.Element => {
+const RadioComponent = (props): JSX.Element => {
     const {
         label,
         name,
-        placeholder,
+        value,
         size,
-
         isDisabled,
-        isClearable,
         handleChange,
 
-        mode,
-        isSearchable,
         optionKey,
         valueKey,
         options,
     } = props;
     return (
         <Form.Item label={label}>
-            <Select
-                showSearch={isSearchable}
-                mode={mode}
+            <Radio.Group
                 id={name}
-                placeholder={placeholder}
+                name={name}
+                value={value}
                 size={size}
                 disabled={isDisabled}
                 onChange={(e): void => {
-                    handleChange(name, e);
+                    handleChange(e.target.name, e.target.value);
                 }}
-                allowClear={isClearable}
             >
                 {options.length && typeof options[0] === 'object'
                     ? options.map(option => (
-                          <Option key={option[valueKey]} value={option[valueKey]}>
+                          <Radio key={option[valueKey]} value={option[valueKey]}>
                               {option[optionKey]}
-                          </Option>
+                          </Radio>
                       ))
                     : options.map(option => (
-                          <Option key={option} value={option}>
+                          <Radio key={option} value={option}>
                               {option}
-                          </Option>
+                          </Radio>
                       ))}
-            </Select>
+            </Radio.Group>
         </Form.Item>
     );
 };
 
-SelectComponent.defaultProps = {
+RadioComponent.defaultProps = {
     label: 'Enter value',
-    placeholder: 'Enter value',
     size: 'default',
     isDisabled: false,
-    isClearable: true,
 
-    mode: 'default',
-    isSearchable: true,
     optionKey: 'Id',
     valueKey: 'description',
 };
 
-SelectComponent.propTypes = {
+RadioComponent.propTypes = {
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     size: PropTypes.string,
     isDisabled: PropTypes.bool,
-    isClearable: PropTypes.bool,
     handleChange: PropTypes.func.isRequired,
 
-    mode: PropTypes.string,
-    isSearchable: PropTypes.bool,
     optionKey: PropTypes.string,
     valueKey: PropTypes.string,
     options: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
-export default SelectComponent;
+export default RadioComponent;

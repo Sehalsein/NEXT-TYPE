@@ -2,10 +2,12 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import AdminLayout from '@components/AdminLayout/Layout';
+import AdminLayout from '@components/AdminLayout/AdminLayout';
 
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import '@public/css/styles.css';
+const breadCrumbs = [
+    { link: '/', title: 'Home' },
+    { link: '/user-list', title: 'Ayana Users' },
+];
 
 const Home = (): JSX.Element => {
     return (
@@ -13,7 +15,7 @@ const Home = (): JSX.Element => {
             <Head>
                 <title>Home</title>
             </Head>
-            <AdminLayout>
+            <AdminLayout breadCrumbs={breadCrumbs}>
                 <>
                     <Link href="/user-add">
                         <a>User Add</a>

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-const JOBS_QUERY = gql`
+export const JOBS_QUERY = gql`
     query Jobs {
         jobs {
             id
@@ -13,4 +13,45 @@ const JOBS_QUERY = gql`
     }
 `;
 
-export default JOBS_QUERY;
+export const CITY = gql`
+    query city {
+        city(input: { slug: "berlin" }) {
+            id
+            name
+            type
+            slug
+            country {
+                name
+            }
+            createdAt
+            updatedAt
+        }
+    }
+`;
+
+export const COUNTRIES = gql`
+    query countries {
+        countries {
+            id
+            name
+            type
+            slug
+            isoCode
+            createdAt
+            updatedAt
+        }
+    }
+`;
+
+export const CITIES = gql`
+    query cities {
+        cities {
+            id
+            name
+            type
+            slug
+            createdAt
+            updatedAt
+        }
+    }
+`;

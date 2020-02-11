@@ -1,71 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Input, Form } from 'antd';
 
 const InputComponent = (props): JSX.Element => {
-    const {
-        label,
-        isRequired,
-        isReadOnly,
-        isDisabled,
-        name,
-        type,
-        value,
-        handleChange,
-        placeholder,
-        title,
-        validation,
-        validator,
-    } = props;
+    const { name, value, label, placeholder, type, size, maxLength, isDisabled, isClearable, handleChange } = props;
     return (
-        <div className="form-group">
-            <label htmlFor={name}>
-                {label}
-                {isRequired ? <span style={{ color: 'red' }}>*</span> : null}
-            </label>
-
-            <input
-                className={`${isReadOnly ? 'form-control-plaintext' : 'form-control'} `}
+        <Form.Item label={label}>
+            <Input
                 id={name}
-                readOnly={isReadOnly}
                 name={name}
-                type={type}
                 value={value}
-                onChange={handleChange}
                 placeholder={placeholder}
+                type={type}
+                size={size}
+                maxLength={maxLength}
                 disabled={isDisabled}
+                allowClear={isClearable}
+                onChange={(e): void => {
+                    handleChange(e.target.name, e.target.value);
+                }}
             />
-            {isRequired && validator && validation
-                ? validator.message(title === 'value' ? name : title, value, validation)
-                : null}
-        </div>
+        </Form.Item>
     );
 };
 
 InputComponent.defaultProps = {
-    label: '',
-    isRequired: false,
-    isReadOnly: false,
-    isDisabled: false,
-    type: 'text',
+    label: 'Enter value',
     placeholder: 'Enter value',
-    title: 'value',
-    validation: '',
-    validator: null,
+    type: 'text',
+    size: 'default',
+    maxLength: 100,
+    isDisabled: false,
+    isClearable: true,
 };
 
 InputComponent.propTypes = {
-    label: PropTypes.string,
-    isRequired: PropTypes.bool,
-    isReadOnly: PropTypes.bool,
-    isDisabled: PropTypes.bool,
     name: PropTypes.string.isRequired,
-    type: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    handleChange: PropTypes.func.isRequired,
+    label: PropTypes.string,
     placeholder: PropTypes.string,
-    title: PropTypes.string,
-    validation: PropTypes.string,
-    validator: PropTypes.objectOf(PropTypes.any),
+    type: PropTypes.string,
+    size: PropTypes.string,
+    maxLength: PropTypes.number,
+    isDisabled: PropTypes.bool,
+    isClearable: PropTypes.bool,
+    handleChange: PropTypes.func.isRequired,
 };
 
 export default InputComponent;

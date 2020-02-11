@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DatePicker, Form } from 'antd';
 
-const DatePickerComponent = (props): JSX.Element => {
+const { RangePicker } = DatePicker;
+
+const DateRangeComponent = (props): JSX.Element => {
     const {
         label,
         name,
@@ -17,8 +19,8 @@ const DatePickerComponent = (props): JSX.Element => {
     } = props;
     return (
         <Form.Item label={label}>
-            <DatePicker
-                style={{ width: '100%', height: '100%' }}
+            <RangePicker
+                style={{ width: '100%' }}
                 id={name}
                 name={name}
                 placeholder={placeholder}
@@ -31,14 +33,11 @@ const DatePickerComponent = (props): JSX.Element => {
                 }}
                 allowClear={isClearable}
             />
-            {/* {isRequired && validator && validation
-                ? validator.message(title === 'value' ? name : title, value, validation)
-                : null} */}
         </Form.Item>
     );
 };
 
-DatePickerComponent.defaultProps = {
+DateRangeComponent.defaultProps = {
     label: 'Enter value',
     placeholder: 'Enter value',
     size: 'default',
@@ -48,7 +47,7 @@ DatePickerComponent.defaultProps = {
     isTimeSelectable: false,
 };
 
-DatePickerComponent.propTypes = {
+DateRangeComponent.propTypes = {
     label: PropTypes.string,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
@@ -61,4 +60,4 @@ DatePickerComponent.propTypes = {
     isTimeSelectable: PropTypes.bool,
 };
 
-export default DatePickerComponent;
+export default DateRangeComponent;

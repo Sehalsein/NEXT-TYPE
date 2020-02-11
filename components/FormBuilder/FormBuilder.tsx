@@ -1,82 +1,100 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Row, Col } from 'antd';
 
 import SelectComponent from '@components/InputComponents/SelectComponent';
 import InputComponent from '@components/InputComponents/InputComponent';
 import DatePickerComponent from '@components/InputComponents/DatePickerComponent';
+import DateRangeComponent from '@components/InputComponents/DateRangeComponent';
+import RadioComponent from '@components/InputComponents/RadioComponent';
 
 const FormBuilder = (props): JSX.Element => {
-    const { handleInput, fields, formData, validator } = props;
+    const { handleInput, fields, formData } = props;
     return (
-        <Row>
+        <Row gutter={[8, 0]}>
             {fields.map(form => {
                 let formInputComponent = <h5>Input</h5>;
-
                 if (form.type === 'select') {
                     formInputComponent = (
                         <SelectComponent
                             label={form.label}
-                            isRequired={form.isRequired}
-                            isReadOnly={form.isReadOnly}
-                            isDisabled={form.isDisabled}
                             name={form.name}
-                            value={formData[form.name]}
-                            handleChange={handleInput}
                             placeholder={form.placeholder}
+                            size={form.size}
+                            isDisabled={form.isDisabled}
+                            isClearable={form.isClearable}
+                            handleChange={handleInput}
+                            mode={form.mode}
+                            isSearchable={form.isSearchable}
                             options={form.options}
                             optionKey={form.optionKey}
                             valueKey={form.valueKey}
-                            title={form.title}
-                            validator={validator}
-                            validation={form.validation}
                         />
                     );
                 } else if (form.type === 'date') {
                     formInputComponent = (
                         <DatePickerComponent
                             label={form.label}
-                            isRequired={form.isRequired}
-                            isReadOnly={form.isReadOnly}
-                            isDisabled={form.isDisabled}
                             name={form.name}
-                            type={form.type}
-                            value={formData[form.name]}
-                            handleChange={handleInput}
                             placeholder={form.placeholder}
-                            title={form.title}
-                            validator={validator}
-                            validation={form.validation}
+                            value={formData[form.name]}
+                            size={form.size}
+                            isDisabled={form.isDisabled}
+                            isClearable={form.isClearable}
+                            handleChange={handleInput}
+                            isTimeSelectable={form.isTimeSelectable}
+                        />
+                    );
+                } else if (form.type === 'date-range') {
+                    formInputComponent = (
+                        <DateRangeComponent
+                            label={form.label}
+                            name={form.name}
+                            placeholder={form.placeholder}
+                            value={formData[form.name]}
+                            size={form.size}
+                            isDisabled={form.isDisabled}
+                            isClearable={form.isClearable}
+                            handleChange={handleInput}
+                            isTimeSelectable={form.isTimeSelectable}
+                        />
+                    );
+                } else if (form.type === 'radio') {
+                    formInputComponent = (
+                        <RadioComponent
+                            label={form.label}
+                            name={form.name}
+                            value={formData[form.name]}
+                            size={form.size}
+                            isDisabled={form.isDisabled}
+                            handleChange={handleInput}
+                            options={form.options}
                         />
                     );
                 } else {
                     formInputComponent = (
                         <InputComponent
                             label={form.label}
-                            isRequired={form.isRequired}
-                            isReadOnly={form.isReadOnly}
-                            isDisabled={form.isDisabled}
                             name={form.name}
                             type={form.type}
-                            value={formData[form.name]}
-                            handleChange={handleInput}
                             placeholder={form.placeholder}
-                            title={form.title}
-                            validator={validator}
-                            validation={form.validation}
+                            value={formData[form.name]}
+                            size={form.size}
+                            maxLength={formData.maxLength}
+                            isDisabled={form.isDisabled}
+                            isClearable={form.isClearable}
+                            handleChange={handleInput}
                         />
                     );
                 }
-
                 return (
                     <Col
-                        xs={form.responsive ? form.responsive.xs : 12}
-                        sm={form.responsive ? form.responsive.sm : 12}
-                        md={form.responsive ? form.responsive.md : 6}
-                        lg={form.responsive ? form.responsive.lg : 4}
-                        xl={form.responsive ? form.responsive.xl : 4}
                         key={form.name}
+                        xs={form.responsive ? form.responsive.xs : 24}
+                        sm={form.responsive ? form.responsive.sm : 24}
+                        md={form.responsive ? form.responsive.md : 24}
+                        lg={form.responsive ? form.responsive.lg : 24}
+                        xl={form.responsive ? form.responsive.xl : 24}
                     >
                         {formInputComponent}
                     </Col>
@@ -86,13 +104,10 @@ const FormBuilder = (props): JSX.Element => {
     );
 };
 
-FormBuilder.defaultProps = {
-    validator: null,
-};
+FormBuilder.defaultProps = {};
 
 FormBuilder.propTypes = {
     handleInput: PropTypes.func.isRequired,
-    validator: PropTypes.objectOf(PropTypes.any),
     fields: PropTypes.arrayOf(
         PropTypes.shape({
             label: PropTypes.string,

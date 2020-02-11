@@ -1,23 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'antd';
 
 // TODO: Fix Button Type
 const ButtonComponent = (props): JSX.Element => {
-    const { className, onClick, title, type } = props;
-    return <input type={type} className={`btn ${className}`} onClick={onClick} value={title} />;
+    const { title, type, size, status, icon, onClick } = props;
+    return (
+        <Button htmlType={type} type={status} size={size} icon={icon} onClick={onClick}>
+            {title}
+        </Button>
+    );
 };
 
 ButtonComponent.defaultProps = {
-    className: '',
     type: 'button',
+    size: 'default',
+    status: 'default',
+    icon: '',
+
     onClick: (): void => {},
 };
 
 ButtonComponent.propTypes = {
-    className: PropTypes.string,
-    onClick: PropTypes.func,
     title: PropTypes.string.isRequired,
     type: PropTypes.string,
+    size: PropTypes.string,
+    status: PropTypes.string,
+    icon: PropTypes.string,
+
+    isDisabled: PropTypes.bool,
+
+    onClick: PropTypes.func,
 };
 
 export default ButtonComponent;
