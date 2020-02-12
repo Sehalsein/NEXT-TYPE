@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Card, Descriptions } from 'antd';
-import ButtonComponent from '@components/InputComponents/ButtonComponent';
+import ButtonComponent from '@components/FormComponents/ButtonComponent';
 
 const ViewBuilder = (props): JSX.Element => {
     const { fields, viewData, layout, column, hasBorder, size, hasColon, secondaryButton, primaryButton } = props;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, Typography, Card } from 'antd';
 
 import TableBuilder from '@components/TableBuilder/TableBuilder';
-import ButtonComponent from '@components/InputComponents/ButtonComponent';
+import ButtonComponent from '@components/FormComponents/ButtonComponent';
 
 const { Title } = Typography;
 

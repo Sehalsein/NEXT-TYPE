@@ -1,113 +1,85 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'antd';
+import { Row, Col, Form } from 'antd';
 
-import SelectComponent from '@components/InputComponents/SelectComponent';
-import InputComponent from '@components/InputComponents/InputComponent';
-import DatePickerComponent from '@components/InputComponents/DatePickerComponent';
-import DateRangeComponent from '@components/InputComponents/DateRangeComponent';
-import RadioComponent from '@components/InputComponents/RadioComponent';
+import ButtonComponent from '@components/FormComponents/ButtonComponent';
+import SectionGenerator from '@components/FormBuilder/SectionGenerator';
+import FormGenerator from '@components/FormBuilder/FormGenerator';
 
 const FormBuilder = (props): JSX.Element => {
-    const { handleInput, fields, formData } = props;
+    const { handleInput, formData, sections, fields, onSubmit, primaryButton, secondaryButton } = props;
+
+    let layout = <p>Loading</p>;
+    if (sections) {
+        layout = <SectionGenerator sections={sections} handleInput={handleInput} formData={formData} />;
+    } else {
+        layout = <FormGenerator fields={fields} handleInput={handleInput} formData={formData} />;
+    }
     return (
-        <Row gutter={[8, 0]}>
-            {fields.map(form => {
-                let formInputComponent = <h5>Input</h5>;
-                if (form.type === 'select') {
-                    formInputComponent = (
-                        <SelectComponent
-                            label={form.label}
-                            name={form.name}
-                            placeholder={form.placeholder}
-                            size={form.size}
-                            isDisabled={form.isDisabled}
-                            isClearable={form.isClearable}
-                            handleChange={handleInput}
-                            mode={form.mode}
-                            isSearchable={form.isSearchable}
-                            options={form.options}
-                            optionKey={form.optionKey}
-                            valueKey={form.valueKey}
+        <Form
+            layout="vertical"
+            onSubmit={(e): void => {
+                e.preventDefault();
+                onSubmit();
+            }}
+        >
+            <Row>{layout}</Row>
+            <Row type="flex" gutter={[8, 8]}>
+                <Col>
+                    <ButtonComponent
+                        title={primaryButton.title}
+                        status={primaryButton.status}
+                        type="submit"
+                        size={primaryButton.size}
+                    />
+                </Col>
+                <Col>
+                    {secondaryButton ? (
+                        <ButtonComponent
+                            title={secondaryButton.title}
+                            onClick={secondaryButton.onClick}
+                            status={secondaryButton.status}
+                            type={secondaryButton.type}
+                            size={secondaryButton.size}
                         />
-                    );
-                } else if (form.type === 'date') {
-                    formInputComponent = (
-                        <DatePickerComponent
-                            label={form.label}
-                            name={form.name}
-                            placeholder={form.placeholder}
-                            value={formData[form.name]}
-                            size={form.size}
-                            isDisabled={form.isDisabled}
-                            isClearable={form.isClearable}
-                            handleChange={handleInput}
-                            isTimeSelectable={form.isTimeSelectable}
-                        />
-                    );
-                } else if (form.type === 'date-range') {
-                    formInputComponent = (
-                        <DateRangeComponent
-                            label={form.label}
-                            name={form.name}
-                            placeholder={form.placeholder}
-                            value={formData[form.name]}
-                            size={form.size}
-                            isDisabled={form.isDisabled}
-                            isClearable={form.isClearable}
-                            handleChange={handleInput}
-                            isTimeSelectable={form.isTimeSelectable}
-                        />
-                    );
-                } else if (form.type === 'radio') {
-                    formInputComponent = (
-                        <RadioComponent
-                            label={form.label}
-                            name={form.name}
-                            value={formData[form.name]}
-                            size={form.size}
-                            isDisabled={form.isDisabled}
-                            handleChange={handleInput}
-                            options={form.options}
-                        />
-                    );
-                } else {
-                    formInputComponent = (
-                        <InputComponent
-                            label={form.label}
-                            name={form.name}
-                            type={form.type}
-                            placeholder={form.placeholder}
-                            value={formData[form.name]}
-                            size={form.size}
-                            maxLength={formData.maxLength}
-                            isDisabled={form.isDisabled}
-                            isClearable={form.isClearable}
-                            handleChange={handleInput}
-                        />
-                    );
-                }
-                return (
-                    <Col
-                        key={form.name}
-                        xs={form.responsive ? form.responsive.xs : 24}
-                        sm={form.responsive ? form.responsive.sm : 24}
-                        md={form.responsive ? form.responsive.md : 24}
-                        lg={form.responsive ? form.responsive.lg : 24}
-                        xl={form.responsive ? form.responsive.xl : 24}
-                    >
-                        {formInputComponent}
-                    </Col>
-                );
-            })}
-        </Row>
+                    ) : null}
+                </Col>
+            </Row>
+        </Form>
     );
 };
 
-FormBuilder.defaultProps = {};
+FormBuilder.defaultProps = {
+    sections: null,
+    fields: null,
+    secondaryButton: null,
+};
 
 FormBuilder.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
     handleInput: PropTypes.func.isRequired,
+    sections: PropTypes.arrayOf(
+        PropTypes.shape({
+            fields: PropTypes.arrayOf(
+                PropTypes.shape({
+                    label: PropTypes.string,
+                    isRequired: PropTypes.bool,
+                    isReadOnly: PropTypes.bool,
+                    isDisabled: PropTypes.bool,
+                    name: PropTypes.string.isRequired,
+                    type: PropTypes.string,
+                    placeholder: PropTypes.string,
+                    title: PropTypes.string,
+                    validation: PropTypes.string,
+                    responsive: PropTypes.object,
+                    options: PropTypes.arrayOf(PropTypes.any),
+                    optionKey: PropTypes.string,
+                    valueKey: PropTypes.string,
+                }),
+            ).isRequired,
+            responsive: PropTypes.object,
+        }),
+    ),
     fields: PropTypes.arrayOf(
         PropTypes.shape({
             label: PropTypes.string,
@@ -124,7 +96,21 @@ FormBuilder.propTypes = {
             optionKey: PropTypes.string,
             valueKey: PropTypes.string,
         }),
-    ).isRequired,
+    ),
+    primaryButton: PropTypes.shape({
+        onClick: PropTypes.func,
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string,
+        size: PropTypes.string,
+        status: PropTypes.string,
+    }).isRequired,
+    secondaryButton: PropTypes.shape({
+        onClick: PropTypes.func,
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string,
+        size: PropTypes.string,
+        status: PropTypes.string,
+    }),
     formData: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 

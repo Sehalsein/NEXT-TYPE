@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { COUNTRIES } from '@services/graphql/queries/test';
 import { useQuery } from '@apollo/react-hooks';
 import TableBuilder from '@components/TableBuilder/TableBuilder';
-import ButtonComponent from '@components/InputComponents/ButtonComponent';
+import ButtonComponent from '@components/FormComponents/ButtonComponent';
 
 const UserTab = (props): JSX.Element => {
     const { title, onViewChange } = props;

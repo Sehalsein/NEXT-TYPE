@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import App from 'next/app';
+import PropTypes from 'prop-types';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ReactBreakpoints from 'react-breakpoints';
 
@@ -18,21 +18,21 @@ const breakpoints = {
     desktopWide: 1920,
 };
 
-type Props = {
-    apollo: any;
+const MyApp = (props): JSX.Element => {
+    const { Component, pageProps, apollo } = props;
+    return (
+        <ApolloProvider client={apollo}>
+            <ReactBreakpoints breakpoints={breakpoints}>
+                <Component {...pageProps} />
+            </ReactBreakpoints>
+        </ApolloProvider>
+    );
 };
-class MyApp extends App<Props, {}> {
-    render(): JSX.Element {
-        const { Component, pageProps, apollo } = this.props;
-        return (
-            <ApolloProvider client={apollo}>
-                <ReactBreakpoints breakpoints={breakpoints}>
-                    <Component {...pageProps} />
-                </ReactBreakpoints>
-            </ApolloProvider>
-        );
-    }
-}
 
-// Wraps all components in the tree with the data provider
+MyApp.propTypes = {
+    Component: PropTypes.element.isRequired,
+    pageProps: PropTypes.objectOf(PropTypes.any).isRequired,
+    apollo: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
 export default ApolloClient(MyApp);

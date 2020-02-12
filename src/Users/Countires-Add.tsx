@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ButtonComponent from '@components/InputComponents/ButtonComponent';
+import ButtonComponent from '@components/FormComponents/ButtonComponent';
 
 const CountriesAdd = (props): JSX.Element => {
     const { onViewChange } = props;

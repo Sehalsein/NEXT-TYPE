@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'antd';
 
-import FormBuilder from '@components/FormBuilder/FormBuilder';
+import FormBuilder from '@components/FormBuilder/FormGenerator';
 
 const SectionGenerator = (props): JSX.Element => {
     const { sections, handleInput, formData, className } = props;

@@ -39,26 +39,25 @@ const DatePickerComponent = (props): JSX.Element => {
 };
 
 DatePickerComponent.defaultProps = {
-    label: 'Enter value',
-    placeholder: 'Enter value',
+    label: 'Select date',
+    placeholder: 'Select date',
     size: 'default',
     isDisabled: false,
     isClearable: true,
-
     isTimeSelectable: false,
 };
 
 DatePickerComponent.propTypes = {
-    label: PropTypes.string,
     name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    label: PropTypes.string,
+    placeholder: PropTypes.string,
     size: PropTypes.string,
     isDisabled: PropTypes.bool,
     isClearable: PropTypes.bool,
-    handleChange: PropTypes.func.isRequired,
-
     isTimeSelectable: PropTypes.bool,
+
+    handleChange: PropTypes.func.isRequired,
 };
 
 export default DatePickerComponent;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Card, Typography } from 'antd';
 // import SimpleReactValidator from 'simple-react-validator';
-import FormGenerator from '@components/FormBuilder/FormGenerator';
+import FormBuilder from '@components/FormBuilder/FormBuilder';
 
 const { Title } = Typography;
 
@@ -9,9 +9,11 @@ type State = {
     formValue: {
         firstName: '';
         lastName: '';
+        password: '';
         email: '';
         designation: '';
         role: '';
+        age: '';
         dob: '';
         validity: '';
     };
@@ -31,6 +33,8 @@ class UserAdd extends React.Component<Props, State> {
             formValue: {
                 firstName: '',
                 lastName: '',
+                age: '',
+                password: '',
                 email: '',
                 designation: '',
                 role: '',
@@ -61,8 +65,10 @@ class UserAdd extends React.Component<Props, State> {
         this.setState({
             formValue: {
                 firstName: '',
+                password: '',
                 lastName: '',
                 email: '',
+                age: '',
                 designation: '',
                 role: '',
                 dob: '',
@@ -78,13 +84,14 @@ class UserAdd extends React.Component<Props, State> {
             <Col>
                 <Title level={2}>User Creation</Title>
                 <Card>
-                    <FormGenerator
+                    <FormBuilder
                         fields={fields}
                         sections={sections}
                         primaryButton={primaryButton}
                         secondaryButton={secondaryButton}
                         formData={formValue}
                         handleInput={this.handleInput}
+                        onSubmit={this.formSubmit}
                     />
                 </Card>
             </Col>

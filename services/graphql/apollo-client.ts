@@ -13,7 +13,6 @@ const link = createHttpLink({
 
 export default withApollo(
     ({ initialState }) =>
-        // eslint-disable-next-line implicit-arrow-linebreak
         new ApolloClient({
             link,
             cache: new InMemoryCache().restore(initialState || {}),

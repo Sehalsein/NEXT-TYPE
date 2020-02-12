@@ -50,7 +50,9 @@ const Error = (props): JSX.Element => {
     return errorScreen;
 };
 
-Error.getInitialProps = ({ res, err }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+Error.getInitialProps = ({ res, err }): any => {
+    // eslint-disable-next-line no-nested-ternary
     const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
     return { statusCode };
 };

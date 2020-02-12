@@ -24,17 +24,6 @@ const UsersAdd = (): JSX.Element => {
 
     const fields = [
         {
-            label: 'First Name',
-            name: 'firstName',
-            type: 'text',
-            placeholder: 'Enter First Name',
-            size: 'large',
-            responsive: {
-                md: 12,
-                lg: 8,
-            },
-        },
-        {
             label: 'Last Name',
             name: 'lastName',
             type: 'text',
@@ -46,10 +35,44 @@ const UsersAdd = (): JSX.Element => {
             },
         },
         {
+            label: 'Password',
+            name: 'password',
+            type: 'password',
+            placeholder: 'Enter Password',
+            size: 'large',
+            responsive: {
+                md: 12,
+                lg: 8,
+            },
+        },
+        {
+            label: 'First Name',
+            name: 'firstName',
+            type: 'text',
+            placeholder: 'Enter First Name',
+            size: 'large',
+            isDisabled: true,
+            responsive: {
+                md: 12,
+                lg: 8,
+            },
+        },
+        {
             label: 'Email',
             name: 'email',
             type: 'email',
             placeholder: 'Enter Email Id',
+            size: 'large',
+            responsive: {
+                md: 12,
+                lg: 8,
+            },
+        },
+        {
+            label: 'Age',
+            name: 'age',
+            type: 'number',
+            placeholder: 'Enter Age',
             size: 'large',
             responsive: {
                 md: 12,
